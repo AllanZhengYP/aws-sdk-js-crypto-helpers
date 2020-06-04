@@ -1,7 +1,7 @@
 import { expect } from "chai";
 import "mocha";
 import { Crc32 } from "../src/index";
-import { fromUtf8 } from "@aws-sdk/util-utf8-universal";
+import { fromUtf8 } from "@aws-sdk/util-utf8-browser";
 
 type TestVector = [Uint8Array, number];
 
@@ -9,7 +9,7 @@ const emptyVector: TestVector = [new Uint8Array(0), 0];
 
 const phraseVector: TestVector = [
   fromUtf8("The quick brown fox jumps over the lazy dog"),
-  0x414fa339
+  0x414fa339,
 ];
 
 const incrementalVectors: Array<TestVector> = [
@@ -21,7 +21,7 @@ const incrementalVectors: Array<TestVector> = [
   [fromUtf8("over "), 2281844364],
   [fromUtf8("the "), 3828401820],
   [fromUtf8("lazy "), 3693501045],
-  [fromUtf8("dog"), 0x414fa339]
+  [fromUtf8("dog"), 0x414fa339],
 ];
 
 const testVectors = new Map<Uint8Array, number>([emptyVector, phraseVector]);
